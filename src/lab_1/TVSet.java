@@ -17,12 +17,13 @@ public class TVSet extends Device {
         super.create();
     }
 
-    TVSet(String name, int diagonal) {
+    TVSet(int diagonal, int price, String name,
+                        String brand, String model) {
         this.diagonal = diagonal;
+        this.price = price;
         this.name = name;
-        price = 1000;
-        brand = "LG";
-        model = "KJ-100";
+        this.brand = brand;
+        this.model = model;
 
         super.create();
     }

@@ -16,6 +16,17 @@ public class GameConsole extends Device {
         super.create();
     }
 
+    GameConsole(int HDDCapacity, int price, String name,
+                                String brand, String model) {
+        this.HDDCapacity = HDDCapacity;
+        this.price = price;
+        this.name = name;
+        this.brand = brand;
+        this.model = model;
+
+        super.create();
+    }
+
     @Override
     public void read() {
         super.read();

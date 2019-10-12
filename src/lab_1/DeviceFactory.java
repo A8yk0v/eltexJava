@@ -2,14 +2,14 @@ package lab_1;
 
 import java.util.Random;
 
-public class Randomizer {
+public class DeviceFactory {
 
-    private static Randomizer instance;
-    private Randomizer(){}
+    private static DeviceFactory instance;
+    private DeviceFactory(){}
 
-    public static Randomizer getInstance(){
+    public static DeviceFactory getInstance(){
         if(instance == null){
-            instance = new Randomizer();
+            instance = new DeviceFactory();
         }
         return instance;
     }
@@ -19,23 +19,35 @@ public class Randomizer {
     private String[] arrayModel = { "FIG-01", "Kl-1", "5", "One" };
     private Random random = new Random();
 
-    public String getRandomName() {
-        String str = arrayName[ random.nextInt(arrayName.length) ];
-        return str;
+    public GameConsole getGameConsole() {
+        return new GameConsole(
+                 1024,
+                 100,
+                 arrayName[ random.nextInt(arrayName.length) ],
+                 arrayBrand[ random.nextInt(arrayBrand.length) ],
+                 arrayModel[ random.nextInt(arrayModel.length) ]
+        );
     }
 
-    public String getRandomModel() {
-        String str = arrayModel[ random.nextInt(arrayModel.length) ];
-        return str;
+    public SetTopBox getSetTopBox() {
+        return new SetTopBox(
+                26,
+                17,
+                5,
+                100,
+                arrayName[ random.nextInt(arrayName.length) ],
+                arrayBrand[ random.nextInt(arrayBrand.length) ],
+                arrayModel[ random.nextInt(arrayModel.length) ]
+        );
     }
 
-    public String getRandomBrand() {
-        String str = arrayBrand[ random.nextInt(arrayBrand.length) ];
-        return str;
-    }
-
-    public int getRandomPrice() {
-        int price = random.nextInt(10000);
-        return price;
+    public TVSet TVSet() {
+        return new TVSet(
+                103,
+                100,
+                arrayName[ random.nextInt(arrayName.length) ],
+                arrayBrand[ random.nextInt(arrayBrand.length) ],
+                arrayModel[ random.nextInt(arrayModel.length) ]
+        );
     }
 }

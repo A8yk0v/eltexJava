@@ -19,6 +19,19 @@ public class SetTopBox extends Device {
         super.create();
     }
 
+    SetTopBox(int width, int height, int depth, int price,
+                    String name, String brand, String model) {
+        this.width = width;
+        this.height = height;
+        this.depth = depth;
+        this.price = price;
+        this.name = name;
+        this.brand = brand;
+        this.model = model;
+
+        super.create();
+    }
+
     @Override
     public void read() {
         super.read();
