@@ -27,6 +27,10 @@ public class Order {
     public boolean isDone() {
         return status.equals(StateOrder.DONE) ? true : false;
     }
+
+    public void read() {
+        System.out.println(credentials.getSurname()+" "+credentials.getName()+": заказал " + cart.getCountItem());
+    }
 }
 
 enum StateOrder {

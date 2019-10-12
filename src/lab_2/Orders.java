@@ -23,4 +23,10 @@ public class Orders {
                 iter.remove();
         }
     }
+
+    public void printAll() {
+        for ( Order dev: orders) {
+            dev.read();
+        }
+    }
 }

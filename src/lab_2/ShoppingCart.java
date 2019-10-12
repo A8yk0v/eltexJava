@@ -20,4 +20,14 @@ public class ShoppingCart {
         // Как быть???
         cart.remove(dev);
     }
+
+    public void printAll() {
+        for ( Device dev: cart) {
+            dev.read();
+        }
+    }
+
+    public int getCountItem() {
+        return cart.size();
+    }
 }
