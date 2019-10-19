@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-public class Orders {
+public class Orders<T extends Order> {
 
-    private PriorityQueue<Order> orders;
+    private PriorityQueue<T> orders;
     Map<Long, Order> warehouse_orders = new HashMap<>();
 
     Orders() {
@@ -15,14 +15,14 @@ public class Orders {
     }
 
     public void shop(ShoppingCart cart, Credentials credentials) {
-        Order order = new Order(cart, credentials);
+        T order = (T) new Order(cart, credentials);
         warehouse_orders.put(order.getCreationTime().getTime(), order);
         orders.add(order);
     }
 
     public void clean() {
-        for (Iterator<Order> iter = orders.iterator(); iter.hasNext(); ) {
-            Order element = iter.next();
+        for (Iterator<T> iter = orders.iterator(); iter.hasNext(); ) {
+            T element = iter.next();
             if ( element.isDone() && element.isTimeout() ) {
                 warehouse_orders.remove( element.getCreationTime().getTime() );
                 iter.remove();
@@ -31,7 +31,7 @@ public class Orders {
     }
 
     public void printAll() {
-        for ( Order dev: orders) {
+        for ( T dev: orders) {
             dev.read();
         }
 

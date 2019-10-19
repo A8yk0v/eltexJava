@@ -4,27 +4,27 @@ import lab_1.Device;
 
 import java.util.*;
 
-public class ShoppingCart {
+public class ShoppingCart<T extends Device> {
 
-    private List<Device> cart;
+    private List<T> cart;
     Set<Integer> idTable = new TreeSet<>();
 
-    ShoppingCart() {
+    public ShoppingCart() {
         cart = new ArrayList<>();
     }
 
-    public void add(Device dev) {
+    public void add(T dev) {
         cart.add(dev);
         idTable.add(dev.getId());
     }
 
-    public void delete(Device dev) {
+    public void delete(T dev) {
         cart.remove(dev);
         idTable.remove(dev);
     }
 
     public void printAll() {
-        for ( Device dev: cart) {
+        for ( T dev: cart) {
             System.out.println("---------");
             dev.read();
         }
@@ -35,8 +35,8 @@ public class ShoppingCart {
         return cart.size();
     }
 
-    public Device getDeviceOnID(int id) {
-        for (Device dev: cart) {
+    public T getDeviceOnID(int id) {
+        for (T dev: cart) {
             if ( dev.getId() == id )
                 return dev;
         }
