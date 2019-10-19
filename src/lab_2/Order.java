@@ -2,7 +2,7 @@ package lab_2;
 
 import java.util.Date;
 
-public class Order {
+public class Order implements Comparable<Order> {
     private StateOrder status;
     private Date creationTime;
     private Date timeout;
@@ -30,6 +30,15 @@ public class Order {
 
     public void read() {
         System.out.println(credentials.getSurname()+" "+credentials.getName()+": заказал " + cart.getCountItem());
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public int compareTo(Order p){
+
+        return (int)this.creationTime.getTime() - (int)p.getCreationTime().getTime();
     }
 }
 

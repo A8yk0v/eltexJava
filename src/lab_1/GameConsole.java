@@ -6,7 +6,7 @@ public class GameConsole extends Device {
     // Объем HDD в гб
     private int HDDCapacity;
 
-    GameConsole() {
+    public GameConsole() {
         HDDCapacity = 1024;
         price = 1000;
         name = "O_MEGA";
@@ -16,7 +16,7 @@ public class GameConsole extends Device {
         super.create();
     }
 
-    GameConsole(int HDDCapacity, int price, String name,
+    public GameConsole(int HDDCapacity, int price, String name,
                                 String brand, String model) {
         this.HDDCapacity = HDDCapacity;
         this.price = price;

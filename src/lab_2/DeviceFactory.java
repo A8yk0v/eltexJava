@@ -1,4 +1,9 @@
-package lab_1;
+package lab_2;
+
+import lab_1.Device;
+import lab_1.GameConsole;
+import lab_1.SetTopBox;
+import lab_1.TVSet;
 
 import java.util.Random;
 
@@ -41,7 +46,7 @@ public class DeviceFactory {
         );
     }
 
-    public TVSet TVSet() {
+    public TVSet getTVSet() {
         return new TVSet(
                 103,
                 100,
@@ -49,5 +54,18 @@ public class DeviceFactory {
                 arrayBrand[ random.nextInt(arrayBrand.length) ],
                 arrayModel[ random.nextInt(arrayModel.length) ]
         );
+    }
+
+    public Device getDevice() {
+        int tmp = random.nextInt(3);
+        switch (tmp) {
+            case  (0):
+                return getGameConsole();
+            case (1):
+                return getSetTopBox();
+            case (2):
+                return getTVSet();
+       }
+       return getTVSet();
     }
 }

@@ -1,16 +1,52 @@
 package lab_2;
 
 import lab_1.Device;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Lab_2_main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // Коллекция для хранения и поиска уникальных идентификаторов
-        Set<Device> idTable = new TreeSet<>();
+        Set<Integer> idTable = new TreeSet<>();
 
-        System.out.println("Hello world!!");
+        // Коллекция для хранения заказов по времени создания
+        //Map<Long, Device> hashmap = new HashMap<>();
+
+        for (int i = 0; i < 100; i++) {
+            Device tmp = DeviceFactory.getInstance().getDevice();
+            ///hashmap.put(new Date().getTime(), tmp);
+            idTable.add( tmp.getId() );
+            // для генерации всей сотни записей в hashmap
+            // нужно уникальное время
+            ///Thread.sleep(2);
+        }
+
+        //System.out.println(hashmap.toString());
+        //System.out.println("hashmap.size()="+hashmap.size());
+        System.out.println("idTable.size()="+idTable.size());
+
+        // Проверка работы ShoppingCart
+        ShoppingCart shoppingCart = new ShoppingCart();
+        //Iterator<Map.Entry<Long, Device>> itr = hashmap.entrySet().iterator();
+        for (int i = 0; i < 7; i++) {
+            //shoppingCart.add( itr.next().getValue() );
+            shoppingCart.add( DeviceFactory.getInstance().getDevice() );
+        }
+        shoppingCart.printAll();
+
+        Credentials credentials = CredentialsFactory.getInstance().getCredentials();
+
+        Orders orders = new Orders();
+        orders.shop(shoppingCart, credentials);
+        orders.printAll();
+
+        // Коллекция для хранения заказов по времени создания
+        Map<Long, Device> warehouse_orders = new HashMap<>();
+        //warehouse_orders.put(orders.)
+
+        // заказы же хранятся в классе Orders ????
+
+
+
+        System.out.println("FINISH");
     }
 }

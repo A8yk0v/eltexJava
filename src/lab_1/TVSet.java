@@ -7,7 +7,7 @@ public class TVSet extends Device {
     // в см
     private int diagonal;
 
-    TVSet() {
+    public TVSet() {
         diagonal = 102;
         price = 1000;
         name = "Hi";
@@ -17,7 +17,7 @@ public class TVSet extends Device {
         super.create();
     }
 
-    TVSet(int diagonal, int price, String name,
+    public TVSet(int diagonal, int price, String name,
                         String brand, String model) {
         this.diagonal = diagonal;
         this.price = price;

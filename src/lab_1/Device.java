@@ -3,7 +3,7 @@ package lab_1;
 import java.util.Scanner;
 import java.util.UUID;
 
-public abstract class Device implements ICrudAction {
+public abstract class Device implements ICrudAction, Comparable<Device> {
     // Счетчик объектов класса
     public static int count = 0;
 
@@ -20,6 +20,7 @@ public abstract class Device implements ICrudAction {
 
     @Override
     public void read() {
+        System.out.println("id= " + id);
         System.out.println("brand= " + brand);
         System.out.println("name= "  + name );
         System.out.println("model= " + model);
@@ -28,10 +29,10 @@ public abstract class Device implements ICrudAction {
 
     @Override
     public void create() {
-        price = 100;
-        name = "NAME";
-        brand = "BRAND";
-        model = "MODEL";
+//        price = 100;
+//        name = "NAME";
+//        brand = "BRAND";
+//        model = "MODEL";
         count++;
     }
 
@@ -54,5 +55,14 @@ public abstract class Device implements ICrudAction {
         model = "";
 
         count--;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int compareTo(Device p){
+
+        return this.id - p.getId();
     }
 }

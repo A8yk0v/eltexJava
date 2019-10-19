@@ -8,7 +8,7 @@ public class SetTopBox extends Device {
     private int height;
     private int depth;
 
-    SetTopBox() {
+    public SetTopBox() {
         width = 10;
         height = 10;
         depth = 10;
@@ -19,7 +19,7 @@ public class SetTopBox extends Device {
         super.create();
     }
 
-    SetTopBox(int width, int height, int depth, int price,
+    public SetTopBox(int width, int height, int depth, int price,
                     String name, String brand, String model) {
         this.width = width;
         this.height = height;
