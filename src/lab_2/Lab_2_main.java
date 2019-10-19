@@ -24,14 +24,20 @@ public class Lab_2_main {
         //System.out.println("hashmap.size()="+hashmap.size());
         System.out.println("idTable.size()="+idTable.size());
 
+
         // Проверка работы ShoppingCart
         ShoppingCart shoppingCart = new ShoppingCart();
         //Iterator<Map.Entry<Long, Device>> itr = hashmap.entrySet().iterator();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 3; i++) {
             //shoppingCart.add( itr.next().getValue() );
             shoppingCart.add( DeviceFactory.getInstance().getDevice() );
         }
         shoppingCart.printAll();
+
+        int id_dev = 0;
+        Device tmp = DeviceFactory.getInstance().getDevice();
+        id_dev = tmp.getId();
+        shoppingCart.add( tmp );
 
         Credentials credentials = CredentialsFactory.getInstance().getCredentials();
 
@@ -47,6 +53,10 @@ public class Lab_2_main {
 
 
 
-        System.out.println("FINISH");
+        System.out.println("-.-.-.-.-.-.-.-");
+
+        System.out.println("Find id=" + id_dev + " in cart:");
+        shoppingCart.getDeviceOnID(id_dev).read();
+
     }
 }

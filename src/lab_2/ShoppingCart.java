@@ -38,8 +38,6 @@ public class ShoppingCart {
         for (Device dev: cart) {
             if ( dev.getId() == id )
                 return dev;
-            else
-                return null;
         }
         return null;
     }
