@@ -8,20 +8,13 @@ public class Lab_2_main {
         // Коллекция для хранения и поиска уникальных идентификаторов
         Set<Integer> idTable = new TreeSet<>();
 
-        // Коллекция для хранения заказов по времени создания
-        //Map<Long, Device> hashmap = new HashMap<>();
-
         for (int i = 0; i < 100; i++) {
             Device tmp = DeviceFactory.getInstance().getDevice();
-            ///hashmap.put(new Date().getTime(), tmp);
             idTable.add( tmp.getId() );
             // для генерации всей сотни записей в hashmap
             // нужно уникальное время
             ///Thread.sleep(2);
         }
-
-        //System.out.println(hashmap.toString());
-        //System.out.println("hashmap.size()="+hashmap.size());
         System.out.println("idTable.size()="+idTable.size());
 
 
@@ -45,18 +38,15 @@ public class Lab_2_main {
         orders.shop(shoppingCart, credentials);
         orders.printAll();
 
-        // Коллекция для хранения заказов по времени создания
-        Map<Long, Device> warehouse_orders = new HashMap<>();
-        //warehouse_orders.put(orders.)
-
-        // заказы же хранятся в классе Orders ????
-
-
+        System.out.println("-.-.-.-.-.-.-.-");
+        System.out.println("shoppingCart.isHaveDevice(id_dev) - " + shoppingCart.isHaveDevice(id_dev));
+        System.out.println("shoppingCart.isHaveDevice(0) - " + shoppingCart.isHaveDevice(0));
 
         System.out.println("-.-.-.-.-.-.-.-");
 
         System.out.println("Find id=" + id_dev + " in cart:");
         shoppingCart.getDeviceOnID(id_dev).read();
 
+        System.out.println("-.-.-.-.-.-.-.-");
     }
 }
