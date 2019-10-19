@@ -10,7 +10,7 @@ public class ShoppingCart<T extends Device> {
 
     private List<T> cart;
 
-    ShoppingCart() {
+    public ShoppingCart() {
         cart = new ArrayList<>();
     }
 
