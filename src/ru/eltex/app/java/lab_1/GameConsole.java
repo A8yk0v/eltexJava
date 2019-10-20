@@ -1,4 +1,4 @@
-package lab_1;
+package ru.eltex.app.java.lab_1;
 
 import java.util.Scanner;
 

@@ -1,9 +1,9 @@
-package lab_2;
+package ru.eltex.app.java.lab_2;
 
-import lab_1.Device;
-import lab_1.GameConsole;
-import lab_1.SetTopBox;
-import lab_1.TVSet;
+import ru.eltex.app.java.lab_1.Device;
+import ru.eltex.app.java.lab_1.GameConsole;
+import ru.eltex.app.java.lab_1.SetTopBox;
+import ru.eltex.app.java.lab_1.TVSet;
 
 import java.util.Random;
 

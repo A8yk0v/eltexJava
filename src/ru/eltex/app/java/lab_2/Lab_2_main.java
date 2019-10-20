@@ -1,6 +1,6 @@
-package lab_2;
+package ru.eltex.app.java.lab_2;
 
-import lab_1.Device;
+import ru.eltex.app.java.lab_1.Device;
 import java.util.*;
 
 public class Lab_2_main {

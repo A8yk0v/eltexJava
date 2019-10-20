@@ -1,4 +1,4 @@
-package lab_2;
+package ru.eltex.app.java.lab_2;
 
 public class Credentials {
     private int id;

@@ -1,8 +1,8 @@
-package lab_3;
+package ru.eltex.app.java.lab_3;
 
-import lab_1.Device;
-import lab_2.DeviceFactory;
-import lab_2.ShoppingCart;
+import ru.eltex.app.java.lab_1.Device;
+import ru.eltex.app.java.lab_2.DeviceFactory;
+import ru.eltex.app.java.lab_2.ShoppingCart;
 
 public class lab_3_main {
     public static void main(String[] args) {
