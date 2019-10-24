@@ -1,5 +1,7 @@
 package ru.eltex.app.java.lab_2;
 
+import ru.eltex.app.java.GlobalConsts;
+
 import java.util.Date;
 
 public class Order implements Comparable<Order> {
@@ -13,10 +15,10 @@ public class Order implements Comparable<Order> {
     Order(ShoppingCart cart, Credentials credentials) {
         this.cart = cart;
         this.credentials = credentials;
-        status = StateOrder.CREATE;
+        status = StateOrder.InWAITING;
         creationTime = new Date();
-        // 3 часа в миллисекундах
-        timeout = new Date(10800000L);
+        // время ожидания
+        timeout = new Date(GlobalConsts.WAIT_TIMEOUT);
     }
 
     public boolean isTimeout() {
@@ -24,8 +26,8 @@ public class Order implements Comparable<Order> {
         return current.getTime() < creationTime.getTime() + timeout.getTime() ? true : false;
     }
 
-    public boolean isDone() {
-        return status.equals(StateOrder.DONE) ? true : false;
+    public boolean isCompleted() {
+        return status.equals(StateOrder.COMPLETED) ? true : false;
     }
 
     public void read() {
@@ -43,6 +45,6 @@ public class Order implements Comparable<Order> {
 }
 
 enum StateOrder {
-    CREATE,
-    DONE
+    InWAITING,
+    COMPLETED
 }

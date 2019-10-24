@@ -23,7 +23,7 @@ public class Orders<T extends Order> {
     public void clean() {
         for (Iterator<T> iter = orders.iterator(); iter.hasNext(); ) {
             T element = iter.next();
-            if ( element.isDone() && element.isTimeout() ) {
+            if ( element.isCompleted() && element.isTimeout() ) {
                 warehouse_orders.remove( element.getCreationTime().getTime() );
                 iter.remove();
             }
