@@ -42,6 +42,10 @@ public class Order implements Comparable<Order> {
 
         return (int)this.creationTime.getTime() - (int)p.getCreationTime().getTime();
     }
+
+    public void executeOrder() {
+        this.status = StateOrder.COMPLETED;
+    }
 }
 
 enum StateOrder {

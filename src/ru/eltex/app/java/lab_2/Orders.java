@@ -26,6 +26,7 @@ public class Orders<T extends Order> {
             if ( element.isCompleted() && element.isTimeout() ) {
                 warehouse_orders.remove( element.getCreationTime().getTime() );
                 iter.remove();
+                break;
             }
         }
     }
@@ -36,5 +37,26 @@ public class Orders<T extends Order> {
         }
 
         System.out.println("warehouse_orders.size()= " + warehouse_orders.size());
+    }
+
+    public synchronized boolean changeOrderStatus() {
+        for (Order value : warehouse_orders.values()) {
+            if ( value.isTimeout() ) {
+                value.executeOrder();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public synchronized boolean removeOneCompletedOrder() {
+        for (Map.Entry<Long, Order> pair: warehouse_orders.entrySet())
+        {
+            if ( pair.getValue().isCompleted() ) {
+                warehouse_orders.remove(pair.getKey());
+                return true;
+            }
+        }
+        return false;
     }
 }
