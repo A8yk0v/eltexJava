@@ -12,7 +12,9 @@ public class DeviceFactory {
     private static DeviceFactory instance;
     private DeviceFactory(){}
 
-    public static DeviceFactory getInstance(){
+    // TODO
+    // Нужен ли synchronized здесь???
+    public synchronized static DeviceFactory getInstance(){
         if(instance == null){
             instance = new DeviceFactory();
         }
@@ -24,7 +26,7 @@ public class DeviceFactory {
     private String[] arrayModel = { "FIG-01", "Kl-1", "5", "One" };
     private Random random = new Random();
 
-    public GameConsole getGameConsole() {
+    private GameConsole getGameConsole() {
         return new GameConsole(
                  1024,
                  100,
@@ -34,7 +36,7 @@ public class DeviceFactory {
         );
     }
 
-    public SetTopBox getSetTopBox() {
+    private SetTopBox getSetTopBox() {
         return new SetTopBox(
                 26,
                 17,
@@ -46,7 +48,7 @@ public class DeviceFactory {
         );
     }
 
-    public TVSet getTVSet() {
+    private TVSet getTVSet() {
         return new TVSet(
                 103,
                 100,

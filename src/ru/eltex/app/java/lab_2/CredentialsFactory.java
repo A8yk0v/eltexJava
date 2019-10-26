@@ -9,7 +9,7 @@ public class CredentialsFactory {
         id = 1;
     }
 
-    public static CredentialsFactory getInstance(){
+    public synchronized static CredentialsFactory getInstance(){
         if(instance == null){
             instance = new CredentialsFactory();
         }
