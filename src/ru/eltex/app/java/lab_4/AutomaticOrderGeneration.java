@@ -15,9 +15,17 @@ public class AutomaticOrderGeneration implements Runnable {
 
     private Orders<Order> orders;
     private Random random = new Random();
+    private long timeout_automicOrderGeneration;
 
     public AutomaticOrderGeneration(Orders<Order> orders) {
+
         this.orders = orders;
+        timeout_automicOrderGeneration = GlobalConsts.IN_AUTOMATICORDERGENERATION_TIMEOUT;
+    }
+    public AutomaticOrderGeneration(Orders<Order> orders, long timeout_automicOrderGeneration) {
+
+        this.orders = orders;
+        this.timeout_automicOrderGeneration = timeout_automicOrderGeneration;
     }
 
     @Override
@@ -25,7 +33,7 @@ public class AutomaticOrderGeneration implements Runnable {
         try
         {
             while (true) {
-                Thread.sleep(GlobalConsts.IN_AUTOMATICORDERGENERATION_TIMEOUT);
+                Thread.sleep(timeout_automicOrderGeneration);
 
                 Credentials credentials = CredentialsFactory.getInstance().getCredentials();
                 ShoppingCart<Device> cart = new ShoppingCart<>();
@@ -35,7 +43,9 @@ public class AutomaticOrderGeneration implements Runnable {
                 }
                 orders.shop(cart, credentials);
 
-                System.out.println("Order generation");
+                // TODO
+                // Стоит ли создавать поток в конструкторе
+                System.out.println(/*Thread.getId() + */"Order generation");
             }
         }
         catch (InterruptedException e)
