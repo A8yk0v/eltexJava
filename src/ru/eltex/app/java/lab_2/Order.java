@@ -50,5 +50,6 @@ public class Order implements Comparable<Order> {
 
 enum StateOrder {
     InWAITING,
-    COMPLETED
+    COMPLETED;
+    int i;
 }

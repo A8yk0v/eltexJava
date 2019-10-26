@@ -23,10 +23,12 @@ public class CompletedCheck extends ACheck {
     public void run() {
         try
         {
-            Thread.sleep(GlobalConsts.IN_WAITINGCHECK_TIMEOUT);
+            while (true) {
+                Thread.sleep(GlobalConsts.IN_COMPLETEDCHECK_TIMEOUT);
 
-            if ( orders.removeOneCompletedOrder() ) {
-                System.out.println("One order - removed");
+                if (orders.removeOneCompletedOrder()) {
+                    System.out.println("One order - removed");
+                }
             }
         }
         catch (InterruptedException e)

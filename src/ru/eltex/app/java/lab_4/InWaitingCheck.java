@@ -1,11 +1,8 @@
 package ru.eltex.app.java.lab_4;
 
 import ru.eltex.app.java.GlobalConsts;
-import ru.eltex.app.java.lab_1.Device;
 import ru.eltex.app.java.lab_2.Order;
 import ru.eltex.app.java.lab_2.Orders;
-
-import java.util.Queue;
 
 /**
  * Класс в потоке с определенным интервалом делает проверку коллекции
@@ -26,10 +23,12 @@ public class InWaitingCheck extends ACheck {
     public void run() {
         try
         {
-            Thread.sleep(GlobalConsts.IN_WAITINGCHECK_TIMEOUT);
+            while (true) {
+                Thread.sleep(GlobalConsts.IN_WAITINGCHECK_TIMEOUT);
 
-            if ( orders.changeOrderStatus() ) {
-                System.out.println("One order - completed");
+                if (orders.changeOrderStatus()) {
+                    System.out.println("One order - completed");
+                }
             }
         }
         catch (InterruptedException e)
