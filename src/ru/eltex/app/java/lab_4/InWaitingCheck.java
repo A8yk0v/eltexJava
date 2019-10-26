@@ -14,9 +14,25 @@ import ru.eltex.app.java.lab_2.Orders;
 public class InWaitingCheck extends ACheck {
 
     private Orders<Order> orders;
+    private long timeout_WaitingCheck;
+    private Thread thread;
 
     public InWaitingCheck(Orders<Order> orders) {
         this.orders = orders;
+        this.timeout_WaitingCheck = GlobalConsts.IN_WAITINGCHECK_TIMEOUT;
+
+        thread = new Thread(this);
+        System.out.println("InWaitingCheck object start, id=" + thread.getId());
+        thread.start();
+    }
+
+    public InWaitingCheck(Orders<Order> orders, long timeout_WaitingCheck) {
+        this.orders = orders;
+        this.timeout_WaitingCheck = timeout_WaitingCheck;
+
+        thread = new Thread(this);
+        System.out.println("InWaitingCheck object start, id=" + thread.getId());
+        thread.start();
     }
 
     @Override
@@ -24,10 +40,10 @@ public class InWaitingCheck extends ACheck {
         try
         {
             while (true) {
-                Thread.sleep(GlobalConsts.IN_WAITINGCHECK_TIMEOUT);
+                Thread.sleep(timeout_WaitingCheck);
 
                 if (orders.changeOrderStatus()) {
-                    System.out.println("One order - completed");
+                    System.out.println("InWaitingCheck=" + thread.getId() + " - One order - completed");
                 }
             }
         }

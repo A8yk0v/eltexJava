@@ -13,20 +13,20 @@ public class GlobalConsts {
      * статуса InWAITING в статус COMPLETED
      * 10 секунд
      */
-    public final static long IN_WAITINGCHECK_TIMEOUT = 8000L;
+    public final static long IN_WAITINGCHECK_TIMEOUT = 6000L;
     /**
      * Время ожидания между проходами класса CompletedCheck
      * коллекции Orders и удаление заказа со
      * статусом COMPLETED
      * 10 секунд
      */
-    public final static long IN_COMPLETEDCHECK_TIMEOUT = 9000L;
+    public final static long IN_COMPLETEDCHECK_TIMEOUT = 7000L;
     /**
      * Время ожидания между генерациями новых заказов
      * в классе AutomaticOrderGeneration
      * 10 секунд
      */
-    public final static long IN_AUTOMATICORDERGENERATION_TIMEOUT = 3000L;
+    public final static long IN_AUTOMATICORDERGENERATION_TIMEOUT = 5000L;
     /**
      * Максимальное кол-во товаров в генерируемых корзинах
      */

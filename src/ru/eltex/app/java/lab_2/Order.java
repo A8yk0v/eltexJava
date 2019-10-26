@@ -21,9 +21,10 @@ public class Order implements Comparable<Order> {
         timeout = new Date(GlobalConsts.WAIT_TIMEOUT);
     }
 
+    // метод возвращает true, если время ожидания истекло
     public boolean isTimeout() {
         Date current = new Date();
-        return current.getTime() < creationTime.getTime() + timeout.getTime() ? true : false;
+        return current.getTime() > creationTime.getTime() + timeout.getTime() ? true : false;
     }
 
     public boolean isCompleted() {

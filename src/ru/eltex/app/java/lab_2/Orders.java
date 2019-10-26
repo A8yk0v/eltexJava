@@ -41,7 +41,7 @@ public class Orders<T extends Order> {
 
     public synchronized boolean changeOrderStatus() {
         for (Order value : warehouse_orders.values()) {
-            if ( value.isTimeout() ) {
+            if ( !value.isCompleted() ) {
                 value.executeOrder();
                 return true;
             }

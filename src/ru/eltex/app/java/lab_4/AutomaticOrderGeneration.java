@@ -16,16 +16,25 @@ public class AutomaticOrderGeneration implements Runnable {
     private Orders<Order> orders;
     private Random random = new Random();
     private long timeout_automicOrderGeneration;
+    Thread thread;
 
     public AutomaticOrderGeneration(Orders<Order> orders) {
 
         this.orders = orders;
         timeout_automicOrderGeneration = GlobalConsts.IN_AUTOMATICORDERGENERATION_TIMEOUT;
+
+        thread = new Thread(this);
+        System.out.println("AutomaticOrderGeneration object start, id=" + thread.getId());
+        thread.start();
     }
     public AutomaticOrderGeneration(Orders<Order> orders, long timeout_automicOrderGeneration) {
 
         this.orders = orders;
         this.timeout_automicOrderGeneration = timeout_automicOrderGeneration;
+
+        thread = new Thread(this);
+        System.out.println("AutomaticOrderGeneration object start, id=" + thread.getId());
+        thread.start();
     }
 
     @Override
@@ -43,9 +52,7 @@ public class AutomaticOrderGeneration implements Runnable {
                 }
                 orders.shop(cart, credentials);
 
-                // TODO
-                // Стоит ли создавать поток в конструкторе
-                System.out.println(/*Thread.getId() + */"Order generation");
+                System.out.println("AutomaticOrderGeneration=" + thread.getId() + " - Order generation");
             }
         }
         catch (InterruptedException e)
