@@ -1,5 +1,7 @@
 package ru.eltex.app.java.lab_2;
 
+import ru.eltex.app.java.lab_5.ManagerOrderFile;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -8,10 +10,13 @@ import java.util.PriorityQueue;
 public class Orders<T extends Order> {
 
     private PriorityQueue<T> orders;
-    Map<Long, Order> warehouse_orders = new HashMap<>();
+    Map<Long, Order> warehouse_orders;
+    ManagerOrderFile managerOrderFile;
 
     public Orders() {
         orders = new PriorityQueue<>();
+        warehouse_orders = new HashMap<>();
+        managerOrderFile = new ManagerOrderFile("OrdersSaveFile", (PriorityQueue<Order>)orders);
     }
 
     public synchronized void shop(ShoppingCart cart, Credentials credentials) {
