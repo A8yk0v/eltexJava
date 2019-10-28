@@ -12,8 +12,7 @@ public class DeviceFactory {
     private static DeviceFactory instance;
     private DeviceFactory(){}
 
-    // TODO
-    // Нужен ли synchronized здесь???
+    // TODO Нужен ли synchronized здесь???
     public synchronized static DeviceFactory getInstance(){
         if(instance == null){
             instance = new DeviceFactory();

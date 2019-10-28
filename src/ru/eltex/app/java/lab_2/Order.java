@@ -47,6 +47,11 @@ public class Order implements Comparable<Order> {
     public void executeOrder() {
         this.status = StateOrder.COMPLETED;
     }
+
+    public int getId() {
+        // TODO Реализовать метод, пока return 0;
+        return 0;
+    }
 }
 
 enum StateOrder {
