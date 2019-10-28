@@ -2,9 +2,7 @@ package ru.eltex.app.java.lab_5;
 
 import ru.eltex.app.java.lab_2.Order;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.PriorityQueue;
 
 public class ManagerOrderFile extends AManageOrder implements Runnable  {
@@ -12,6 +10,9 @@ public class ManagerOrderFile extends AManageOrder implements Runnable  {
     private PriorityQueue<Order> orders;
     private ObjectOutputStream objectOutputStream;
     FileOutputStream outputStream;
+
+    FileInputStream fileInputStream;
+    ObjectInputStream objectInputStream;
 
     public ManagerOrderFile(String save_file, PriorityQueue<Order> orders) {
         super(save_file);
@@ -21,8 +22,11 @@ public class ManagerOrderFile extends AManageOrder implements Runnable  {
             outputStream = new FileOutputStream(save_file);
             objectOutputStream = new ObjectOutputStream(outputStream);
 
+            fileInputStream = new FileInputStream(save_file);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+
             Thread t = new Thread(this);
-            t.run();
+            t.start();
         }
         catch (IOException e) {
             System.out.println(e.toString());
@@ -30,8 +34,23 @@ public class ManagerOrderFile extends AManageOrder implements Runnable  {
     }
 
     @Override
-    public void readById(int id) {
-        int count;
+    public Order readById(int id) {
+        try {
+            int count = objectInputStream.readInt();
+
+            for (int i = 0; i < count; i++) {
+                Order tmp = (Order)objectInputStream.readObject();
+
+                if ( tmp.getId() == id ) {
+                    return tmp;
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        return null;
     }
 
     @Override
@@ -40,8 +59,21 @@ public class ManagerOrderFile extends AManageOrder implements Runnable  {
     }
 
     @Override
-    public void readAll() {
+    public PriorityQueue<Order> readAll() {
 
+        PriorityQueue<Order> orders_tmp = new PriorityQueue<>();
+        try {
+            int count = objectInputStream.readInt();
+
+            for (int i = 0; i < count; i++) {
+                orders_tmp.add( (Order)objectInputStream.readObject() );
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        return orders_tmp;
     }
 
     @Override
