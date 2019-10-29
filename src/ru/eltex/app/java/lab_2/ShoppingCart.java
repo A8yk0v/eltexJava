@@ -2,9 +2,10 @@ package ru.eltex.app.java.lab_2;
 
 import ru.eltex.app.java.lab_1.Device;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ShoppingCart<T extends Device> {
+public class ShoppingCart<T extends Device> implements Serializable {
 
     private List<T> cart;
     Set<Integer> idTable = new TreeSet<>();

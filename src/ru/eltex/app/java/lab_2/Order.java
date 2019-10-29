@@ -2,12 +2,15 @@ package ru.eltex.app.java.lab_2;
 
 import ru.eltex.app.java.GlobalConsts;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
-public class Order implements Comparable<Order> {
+public class Order implements Comparable<Order>, Serializable {
     private StateOrder status;
     private Date creationTime;
     private Date timeout;
+    private int id;
 
     private Credentials credentials;
     private ShoppingCart cart;
@@ -19,6 +22,9 @@ public class Order implements Comparable<Order> {
         creationTime = new Date();
         // время ожидания
         timeout = new Date(GlobalConsts.WAIT_TIMEOUT);
+        // уникальный id
+        UUID uuid = UUID.randomUUID();
+        id = uuid.hashCode();
     }
 
     // метод возвращает true, если время ожидания истекло
@@ -49,8 +55,7 @@ public class Order implements Comparable<Order> {
     }
 
     public int getId() {
-        // TODO Реализовать метод, пока return 0;
-        return 0;
+        return id;
     }
 }
 

@@ -6,23 +6,41 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Orders<T extends Order> {
 
     private PriorityQueue<T> orders;
     Map<Long, Order> warehouse_orders;
-    ManagerOrderFile managerOrderFile;
+
+    // Блокировка для параллельной работы коллекции
+    // Блокировка заменила synchronized, т.к. нужно было передать
+    // блокировку в класс AManageOrder
+    private Lock ordersLock;
 
     public Orders() {
         orders = new PriorityQueue<>();
         warehouse_orders = new HashMap<>();
-        managerOrderFile = new ManagerOrderFile("OrdersSaveFile", (PriorityQueue<Order>)orders);
+        ordersLock = new ReentrantLock();
     }
 
-    public synchronized void shop(ShoppingCart cart, Credentials credentials) {
+    public PriorityQueue<T> getOrders() {
+        return orders;
+    }
+
+    public Lock getOrdersLock() {
+        return ordersLock;
+    }
+
+    public void shop(ShoppingCart cart, Credentials credentials) {
+        ordersLock.lock();
+
         T order = (T) new Order(cart, credentials);
         warehouse_orders.put(order.getCreationTime().getTime(), order);
         orders.add(order);
+
+        ordersLock.unlock();
     }
 
     public void clean() {
@@ -44,24 +62,32 @@ public class Orders<T extends Order> {
         System.out.println("warehouse_orders.size()= " + warehouse_orders.size());
     }
 
-    public synchronized boolean changeOrderStatus() {
+    public boolean changeOrderStatus() {
+        ordersLock.lock();
+
         for (Order value : warehouse_orders.values()) {
             if ( !value.isCompleted() ) {
                 value.executeOrder();
+                ordersLock.unlock();
                 return true;
             }
         }
+        ordersLock.unlock();
         return false;
     }
 
-    public synchronized boolean removeOneCompletedOrder() {
+    public boolean removeOneCompletedOrder() {
+        ordersLock.lock();
+
         for (Map.Entry<Long, Order> pair: warehouse_orders.entrySet())
         {
             if ( pair.getValue().isCompleted() ) {
                 warehouse_orders.remove(pair.getKey());
+                ordersLock.unlock();
                 return true;
             }
         }
+        ordersLock.unlock();
         return false;
     }
 }

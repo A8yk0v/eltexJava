@@ -1,6 +1,8 @@
 package ru.eltex.app.java.lab_2;
 
-public class Credentials {
+import java.io.Serializable;
+
+public class Credentials implements Serializable {
     private int id;
     private String surname;
     private String name;

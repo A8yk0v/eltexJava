@@ -4,33 +4,15 @@ import ru.eltex.app.java.lab_2.Order;
 
 import java.io.*;
 import java.util.PriorityQueue;
+import java.util.concurrent.locks.Lock;
 
-public class ManagerOrderFile extends AManageOrder implements Runnable  {
+public class ManagerOrderFile extends AManageOrder {
 
-    private PriorityQueue<Order> orders;
-    private ObjectOutputStream objectOutputStream;
-    FileOutputStream outputStream;
+    public ManagerOrderFile(String save_file, PriorityQueue<Order> orders, Lock ordersLock) {
+        super(save_file, orders, ordersLock);
 
-    FileInputStream fileInputStream;
-    ObjectInputStream objectInputStream;
-
-    public ManagerOrderFile(String save_file, PriorityQueue<Order> orders) {
-        super(save_file);
-        this.orders = orders;
-
-        try {
-            outputStream = new FileOutputStream(save_file);
-            objectOutputStream = new ObjectOutputStream(outputStream);
-
-            fileInputStream = new FileInputStream(save_file);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-
-            Thread t = new Thread(this);
-            t.start();
-        }
-        catch (IOException e) {
-            System.out.println(e.toString());
-        }
+        // TODO Что точно должно быть!!!:c
+        Object object;
     }
 
     @Override
@@ -78,6 +60,7 @@ public class ManagerOrderFile extends AManageOrder implements Runnable  {
 
     @Override
     public void saveAll() {
+        ordersLock.lock();
         try {
             objectOutputStream.writeInt(orders.size());
 
@@ -88,20 +71,10 @@ public class ManagerOrderFile extends AManageOrder implements Runnable  {
         catch (IOException e) {
             System.out.println(e.toString());
         }
-    }
-
-    @Override
-    public void run() {
-        try {
-            while(true) {
-                Thread.sleep(15000);
-
-                saveAll();
-                System.out.println("ManagerOrderFile: saveAll()");
-            }
+        finally {
+            ordersLock.unlock();
         }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
+
+        System.out.println("ManagerOrderFile completed");
     }
 }

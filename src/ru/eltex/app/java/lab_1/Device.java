@@ -1,9 +1,10 @@
 package ru.eltex.app.java.lab_1;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.UUID;
 
-public abstract class Device implements ICrudAction, Comparable<Device> {
+public abstract class Device implements ICrudAction, Comparable<Device>, Serializable {
     // Счетчик объектов класса
     public static int count = 0;
 
