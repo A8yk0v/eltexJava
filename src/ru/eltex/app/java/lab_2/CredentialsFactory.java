@@ -2,18 +2,30 @@ package ru.eltex.app.java.lab_2;
 
 import java.util.Random;
 
+/**
+ * Фабричный класс синглтон, возвращающий класса Credentials.
+ *
+ * Паттерн реализован ввиде Double Checked Locking & volatile Singleton.
+ */
+
 public class CredentialsFactory {
 
-    private static CredentialsFactory instance;
+    private static volatile CredentialsFactory instance;
     private CredentialsFactory(){
         id = 1;
     }
 
-    public synchronized static CredentialsFactory getInstance(){
-        if(instance == null){
-            instance = new CredentialsFactory();
+    public static CredentialsFactory getInstance() {
+        CredentialsFactory localInstance = instance;
+        if (localInstance == null) {
+            synchronized (DeviceFactory.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new CredentialsFactory();
+                }
+            }
         }
-        return instance;
+        return localInstance;
     }
 
     private static int id;

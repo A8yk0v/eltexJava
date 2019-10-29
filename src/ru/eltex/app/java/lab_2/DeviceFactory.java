@@ -7,17 +7,29 @@ import ru.eltex.app.java.lab_1.TVSet;
 
 import java.util.Random;
 
+/**
+ * Фабричный класс синглтон, возвращающий случайным образом
+ * наследника класса товаров Device.
+ *
+ * Паттерн реализован ввиде Double Checked Locking & volatile Singleton.
+ */
+
 public class DeviceFactory {
 
-    private static DeviceFactory instance;
+    private static volatile DeviceFactory instance;
     private DeviceFactory(){}
 
-    // TODO Нужен ли synchronized здесь???
-    public synchronized static DeviceFactory getInstance(){
-        if(instance == null){
-            instance = new DeviceFactory();
+    public static DeviceFactory getInstance() {
+        DeviceFactory localInstance = instance;
+        if (localInstance == null) {
+            synchronized (DeviceFactory.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new DeviceFactory();
+                }
+            }
         }
-        return instance;
+        return localInstance;
     }
 
     private String[] arrayName = { "Hi", "Love", "Tree", "Stone" };
