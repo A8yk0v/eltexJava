@@ -19,6 +19,8 @@ public class Lab_5_main {
 
         AutomaticOrderGeneration automaticOrderGeneration_1 =
             new AutomaticOrderGeneration(store);
+        Thread th1 = new Thread(automaticOrderGeneration_1);
+        th1.start();
 
         //InWaitingCheck inWaitingCheck_1 = new InWaitingCheck(store);
 
@@ -33,6 +35,8 @@ public class Lab_5_main {
             Thread.currentThread().interrupt();
         }
 
+        th1.interrupt();
+
         store.printAll();
         managerOrderFile.saveAll();
         store.printAll_descriprion();
@@ -41,13 +45,7 @@ public class Lab_5_main {
 
         PriorityQueue<Order> test = managerOrderFile.readAll();
 
-        Credentials credentials = CredentialsFactory.getInstance().getCredentials();
-        ShoppingCart<Device> cart = new ShoppingCart<>();
-        int count_device = new Random().nextInt(GlobalConsts.MAX_DEVICE_COUNT_IN_CARTS + 1);
-        for (int i = 0; i < count_device; i++) {
-            cart.add(DeviceFactory.getInstance().getDevice());
-        }
-        Order another_one_order = new Order(cart, CredentialsFactory.getInstance().getCredentials());
+        Order another_one_order = automaticOrderGeneration_1.getOrder();
         System.out.print("new Order.read() - "); another_one_order.read();
 
         store.getOrdersLock().lock();
@@ -60,6 +58,9 @@ public class Lab_5_main {
         for (Order item: test) {
             item.read();
         }
+
+        th1 = new Thread(automaticOrderGeneration_1);
+        th1.start();
 
         System.out.println("The end(((");
     }

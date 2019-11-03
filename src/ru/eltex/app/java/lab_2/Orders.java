@@ -43,6 +43,12 @@ public class Orders<T extends Order> {
         ordersLock.unlock();
     }
 
+    public void addOrder(T order) {
+        ordersLock.lock();
+        orders.add( order );
+        ordersLock.unlock();
+    }
+
     public void clean() {
         for (Iterator<T> iter = orders.iterator(); iter.hasNext(); ) {
             T element = iter.next();
