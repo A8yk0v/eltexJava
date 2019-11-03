@@ -26,7 +26,7 @@ public class GlobalConsts {
      * в классе AutomaticOrderGeneration
      * 10 секунд
      */
-    public final static long IN_AUTOMATICORDERGENERATION_TIMEOUT = 5000L;
+    public final static long IN_AUTOMATICORDERGENERATION_TIMEOUT = 2500L;
     /**
      * Максимальное кол-во товаров в генерируемых корзинах
      */

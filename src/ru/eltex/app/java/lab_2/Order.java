@@ -15,7 +15,7 @@ public class Order implements Comparable<Order>, Serializable {
     private Credentials credentials;
     private ShoppingCart cart;
 
-    Order(ShoppingCart cart, Credentials credentials) {
+    public Order(ShoppingCart cart, Credentials credentials) {
         this.cart = cart;
         this.credentials = credentials;
         status = StateOrder.InWAITING;

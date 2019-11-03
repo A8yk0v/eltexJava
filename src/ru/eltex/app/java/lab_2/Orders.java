@@ -62,6 +62,15 @@ public class Orders<T extends Order> {
         System.out.println("warehouse_orders.size()= " + warehouse_orders.size());
     }
 
+    public void printAll_descriprion() {
+        ordersLock.lock();
+        System.out.println("warehouse_orders.size()= " + warehouse_orders.size());
+        for ( T dev: orders) {
+            dev.read();
+        }
+        ordersLock.unlock();
+    }
+
     public boolean changeOrderStatus() {
         ordersLock.lock();
 

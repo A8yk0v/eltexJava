@@ -46,7 +46,7 @@ public class AutomaticOrderGeneration implements Runnable {
 
                 Credentials credentials = CredentialsFactory.getInstance().getCredentials();
                 ShoppingCart<Device> cart = new ShoppingCart<>();
-                int count_device = random.nextInt(GlobalConsts.MAX_DEVICE_COUNT_IN_CARTS);
+                int count_device = random.nextInt(GlobalConsts.MAX_DEVICE_COUNT_IN_CARTS + 1);
                 for (int i = 0; i < count_device; i++) {
                     cart.add(DeviceFactory.getInstance().getDevice());
                 }
