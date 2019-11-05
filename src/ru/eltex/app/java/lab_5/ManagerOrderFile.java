@@ -33,33 +33,33 @@ public class ManagerOrderFile extends AManageOrder {
         return null;
     }
 
-    @Override
-    public void saveById(int id) {
-        ordersLock.lock();
-//        super.outputInitEnd();
-        for (Order item: orders) {
-            if (item.getId() == id) {
-                try {
-                    // В таком варианте снова записывается заголовок потока
-//                    objectOutputStream_end.writeObject(item);
-                    PriorityQueue<Order> orders_tmp = readAll();
-                    if ( !orders_tmp.contains(item) ) {
-                        orders_tmp.add(item);
-                        PriorityQueue<Order> orders_save = orders;
-                        orders = orders_tmp;
-                        saveAll();
-                        orders = orders_save;
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                }
-                ordersLock.unlock();
-                return;
-            }
-        }
-//        super.outputCloseEnd();
-        ordersLock.unlock();
-    }
+//    @Override
+//    public void saveById(int id) {
+//        ordersLock.lock();
+////        super.outputInitEnd();
+//        for (Order item: orders) {
+//            if (item.getId() == id) {
+//                try {
+//                    // В таком варианте снова записывается заголовок потока
+//                    // objectOutputStream_end.writeObject(item);
+//                    PriorityQueue<Order> orders_tmp = readAll();
+//                    if ( !orders_tmp.contains(item) ) {
+//                        orders_tmp.add(item);
+//                        PriorityQueue<Order> orders_save = orders;
+//                        orders = orders_tmp;
+//                        saveAll();
+//                        orders = orders_save;
+//                    }
+//                } catch (Exception e) {
+//                    System.out.println(e.toString());
+//                }
+//                ordersLock.unlock();
+//                return;
+//            }
+//        }
+////        super.outputCloseEnd();
+//        ordersLock.unlock();
+//    }
 
     @Override
     public PriorityQueue<Order> readAll() {

@@ -5,7 +5,6 @@ import ru.eltex.app.java.lab_2.Order;
 
 import java.io.EOFException;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.concurrent.locks.Lock;
 
@@ -39,30 +38,6 @@ public class ManagerOrderJSON extends AManageOrder {
             super.inputClose();
         }
         return null;
-    }
-
-    @Override
-    public void saveById(int id) {
-        ordersLock.lock();
-        for (Order item: orders) {
-            if (item.getId() == id) {
-                try {
-                    PriorityQueue<Order> orders_tmp = readAll();
-                    if ( !orders_tmp.contains(item) ) {
-                        orders_tmp.add(item);
-                        PriorityQueue<Order> orders_save = orders;
-                        orders = orders_tmp;
-                        saveAll();
-                        orders = orders_save;
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                }
-                ordersLock.unlock();
-                return;
-            }
-        }
-        ordersLock.unlock();
     }
 
     @Override

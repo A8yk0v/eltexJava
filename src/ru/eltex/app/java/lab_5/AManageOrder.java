@@ -26,15 +26,36 @@ public abstract class AManageOrder implements IOrder {
     protected FileInputStream fileInputStream;
     protected ObjectInputStream objectInputStream;
 
-//    protected FileOutputStream fileOutputStream_end;
-//    protected ObjectOutputStream objectOutputStream_end;
-
     protected String save_file;
 
     public AManageOrder(String save_file, PriorityQueue<Order> orders, Lock ordersLock) {
         this.orders = orders;
         this.ordersLock = ordersLock;
         this.save_file = save_file;
+    }
+
+    @Override
+    public void saveById(int id) {
+        ordersLock.lock();
+        for (Order item: orders) {
+            if (item.getId() == id) {
+                try {
+                    PriorityQueue<Order> orders_tmp = readAll();
+                    if ( !orders_tmp.contains(item) ) {
+                        orders_tmp.add(item);
+                        PriorityQueue<Order> orders_save = orders;
+                        orders = orders_tmp;
+                        saveAll();
+                        orders = orders_save;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                }
+                ordersLock.unlock();
+                return;
+            }
+        }
+        ordersLock.unlock();
     }
 
     protected void inputInit() {
@@ -72,22 +93,4 @@ public abstract class AManageOrder implements IOrder {
             e.printStackTrace();
         }
     }
-
-//    protected void outputInitEnd() {
-//        try {
-//            fileOutputStream_end = new FileOutputStream(save_file, true);
-//            objectOutputStream_end = new ObjectOutputStream(fileOutputStream_end);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    protected void outputCloseEnd() {
-//        try {
-//            fileOutputStream_end.close();
-//            objectOutputStream_end.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
