@@ -53,6 +53,8 @@ public class ManagerOrderFile extends AManageOrder {
                 } catch (Exception e) {
                     System.out.println(e.toString());
                 }
+                ordersLock.unlock();
+                return;
             }
         }
 //        super.outputCloseEnd();
@@ -64,8 +66,6 @@ public class ManagerOrderFile extends AManageOrder {
         super.inputInit();
         PriorityQueue<Order> orders_tmp = new PriorityQueue<>();
         try {
-            int k = objectInputStream.available();
-            //while (objectInputStream.available() != 0) {
             while(true) {
                 orders_tmp.add( (Order)objectInputStream.readObject() );
             }
@@ -94,7 +94,6 @@ public class ManagerOrderFile extends AManageOrder {
             ordersLock.unlock();
             super.outputClose();
         }
-
         System.out.println("ManagerOrderFile completed");
     }
 }

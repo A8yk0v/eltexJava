@@ -65,7 +65,8 @@ public class Orders<T extends Order> {
 //            dev.read();
 //        }
 
-        System.out.println("warehouse_orders.size()= " + warehouse_orders.size());
+        //System.out.println("warehouse_orders.size()= " + warehouse_orders.size());
+        System.out.println("orders.size()= " + orders.size());
     }
 
     public void printAll_descriprion() {
