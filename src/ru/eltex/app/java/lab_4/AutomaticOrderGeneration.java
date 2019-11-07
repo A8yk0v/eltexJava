@@ -17,13 +17,17 @@ public class AutomaticOrderGeneration implements Runnable {
     private Random random = new Random();
     private long timeout_automicOrderGeneration;
 
-    public AutomaticOrderGeneration(Orders<Order> orders) {
+    public AutomaticOrderGeneration() {
+        this.orders = new Orders<>();
+        timeout_automicOrderGeneration = GlobalConsts.IN_AUTOMATICORDERGENERATION_TIMEOUT;
+    }
 
+    public AutomaticOrderGeneration(Orders<Order> orders) {
         this.orders = orders;
         timeout_automicOrderGeneration = GlobalConsts.IN_AUTOMATICORDERGENERATION_TIMEOUT;
     }
-    public AutomaticOrderGeneration(Orders<Order> orders, long timeout_automicOrderGeneration) {
 
+    public AutomaticOrderGeneration(Orders<Order> orders, long timeout_automicOrderGeneration) {
         this.orders = orders;
         this.timeout_automicOrderGeneration = timeout_automicOrderGeneration;
     }
