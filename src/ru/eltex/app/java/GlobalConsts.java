@@ -31,4 +31,6 @@ public class GlobalConsts {
      * Максимальное кол-во товаров в генерируемых корзинах
      */
     public final static int MAX_DEVICE_COUNT_IN_CARTS = 4;
+
+    public static final String ORDERS_SAVE_FILE_SEV = "OrdersSaveFile.sev";
 }

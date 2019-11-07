@@ -1,21 +1,17 @@
 package ru.eltex.app.java.lab_5;
 
 import ru.eltex.app.java.GlobalConsts;
-import ru.eltex.app.java.lab_1.Device;
 import ru.eltex.app.java.lab_2.*;
 import ru.eltex.app.java.lab_4.AutomaticOrderGeneration;
-import ru.eltex.app.java.lab_4.CompletedCheck;
-import ru.eltex.app.java.lab_4.InWaitingCheck;
 
 import java.util.PriorityQueue;
-import java.util.Random;
 
 public class Lab_5_main {
 
     public static void main(String[] args) {
         Orders<Order> store = new Orders<>();
         ManagerOrderFile managerOrderFile =
-            new ManagerOrderFile("OrdersSaveFile.sev", store.getOrders(), store.getOrdersLock());
+            new ManagerOrderFile(GlobalConsts.ORDERS_SAVE_FILE_SEV, store.getOrders(), store.getOrdersLock());
 
         AutomaticOrderGeneration automaticOrderGeneration_1 =
             new AutomaticOrderGeneration(store);
@@ -59,8 +55,8 @@ public class Lab_5_main {
             item.read();
         }
 
-        th1 = new Thread(automaticOrderGeneration_1);
-        th1.start();
+//        th1 = new Thread(automaticOrderGeneration_1);
+//        th1.start();
 
         System.out.println("The end(((");
     }
