@@ -22,6 +22,7 @@ public class Lab_6_main_client {
 
                 client.udp_response();
                 System.out.println("Client cycle end");
+                Thread.sleep(3000);
             }
         }
         catch (BindException e) {

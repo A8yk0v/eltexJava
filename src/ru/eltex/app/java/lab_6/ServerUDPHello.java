@@ -18,11 +18,13 @@ public class ServerUDPHello implements Runnable {
     private DatagramSocket socket;
     private InetAddress address;
     private DatagramPacket packet;
+    private int client_port;
     private boolean running = true;
 
     public ServerUDPHello(int client_port, DatagramSocket socket) {
         try {
             this.socket = socket;
+            this.client_port = client_port;
             address = InetAddress.getByName("127.0.0.1"); //255.255.255.255
             String server_tcp_port = String.valueOf(GlobalConsts_for_lab6.SERVER_TCP_PORT);
             byte[]message = server_tcp_port.getBytes();
@@ -34,7 +36,7 @@ public class ServerUDPHello implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("ServerUDPHello is starting");
+        System.out.println("ServerUDPHello is starting on port=" + client_port);
         while (running) {
             try {
                 Thread.sleep(GlobalConsts_for_lab6.SERVER_UDP_HELLO_TIMEOUT);

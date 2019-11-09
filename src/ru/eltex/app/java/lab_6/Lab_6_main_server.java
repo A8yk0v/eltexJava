@@ -17,11 +17,17 @@ public class Lab_6_main_server {
 
         try {
             DatagramSocket UDPSocket = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORT_FOR_INVITATION);
-            ServerUDPHello serverUDPHello = new ServerUDPHello(GlobalConsts_for_lab6.CLIENT_UDP_PORT_1, UDPSocket);
             ServerUDPOrderComplete serverUDPOrderComplete =
                     new ServerUDPOrderComplete(GlobalConsts_for_lab6.CLIENT_UDP_PORT_1, UDPSocket);
-            Thread th_udp_hello = new Thread(serverUDPHello);
-            th_udp_hello.start();
+            ServerUDPHello serverUDPHello_1 = new ServerUDPHello(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[0], UDPSocket);
+            Thread th_udp_hello_1 = new Thread(serverUDPHello_1);
+            th_udp_hello_1.start();
+            ServerUDPHello serverUDPHello_2 = new ServerUDPHello(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[1], UDPSocket);
+            Thread th_udp_hello_2 = new Thread(serverUDPHello_2);
+            th_udp_hello_2.start();
+            ServerUDPHello serverUDPHello_3 = new ServerUDPHello(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[2], UDPSocket);
+            Thread th_udp_hello_3 = new Thread(serverUDPHello_3);
+            th_udp_hello_3.start();
 
             Orders<Order> orders = new Orders<>();
             PublisherCompleteOrder publisherCompleteOrder = new PublisherCompleteOrder();

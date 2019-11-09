@@ -17,7 +17,7 @@ public class Client {
 
     public Client() throws Exception {
         // test     ---
-        DatagramSocket socket1 = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[0]);
+        //DatagramSocket socket1 = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[0]);
         // test end ---
 
         fsend = false;
@@ -27,6 +27,7 @@ public class Client {
         while (stop_flag) {
             try {
                 socket = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[i]);
+                System.out.println("Client UDP start on port=" + GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[i]);
                 stop_flag = false;
             }
             catch (BindException e) {
