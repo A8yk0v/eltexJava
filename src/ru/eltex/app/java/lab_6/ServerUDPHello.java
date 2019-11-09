@@ -1,5 +1,7 @@
 package ru.eltex.app.java.lab_6;
 
+import ru.eltex.app.java.GlobalConsts_for_lab6;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -14,17 +16,16 @@ import java.net.InetAddress;
 public class ServerUDPHello implements Runnable {
 
     private DatagramSocket socket;
-    private int base_port;
     private InetAddress address;
     private DatagramPacket packet;
     private boolean running = true;
 
-    public ServerUDPHello(int base_port, int client_port, DatagramSocket socket) {
+    public ServerUDPHello(int client_port, DatagramSocket socket) {
         try {
-            this.base_port = base_port;
             this.socket = socket;
-            address = InetAddress.getByName("127.0.0.1");
-            byte[]message = "4444".getBytes();
+            address = InetAddress.getByName("127.0.0.1"); //255.255.255.255
+            String server_tcp_port = String.valueOf(GlobalConsts_for_lab6.SERVER_TCP_PORT);
+            byte[]message = server_tcp_port.getBytes();
             packet = new DatagramPacket(message, message.length, address, client_port);
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,10 +37,8 @@ public class ServerUDPHello implements Runnable {
         System.out.println("ServerUDPHello is starting");
         while (running) {
             try {
-
-                Thread.sleep(1000);
+                Thread.sleep(GlobalConsts_for_lab6.SERVER_UDP_HELLO_TIMEOUT);
                 socket.send(packet);
-                System.out.println("send");
 
             } catch (InterruptedException e) {
                 e.printStackTrace();

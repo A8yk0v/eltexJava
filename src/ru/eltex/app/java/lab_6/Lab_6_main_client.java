@@ -3,6 +3,8 @@ package ru.eltex.app.java.lab_6;
 import ru.eltex.app.java.lab_2.Order;
 import ru.eltex.app.java.lab_4.AutomaticOrderGeneration;
 
+import java.net.BindException;
+
 public class Lab_6_main_client {
 
     static Client client;
@@ -12,13 +14,18 @@ public class Lab_6_main_client {
             client = new Client();
             while (!client.listen()) ;
 
-            client.TCPConnect();
+            while (true) {
+                client.TCPConnect();
+                Order myOrder = new AutomaticOrderGeneration().getOrder();
+                client.orderSend(myOrder);
+                client.TCPBreak();
 
-            Order myOrder = new AutomaticOrderGeneration().getOrder();
-            client.orderSend(myOrder);
-            client.TCPBreak();
-
-            System.out.println("Client end)");
+                client.udp_response();
+                System.out.println("Client cycle end");
+            }
+        }
+        catch (BindException e) {
+            System.out.println("Socket address already in use (Bind failed)");
         }
         catch (Exception e) {
             e.printStackTrace();

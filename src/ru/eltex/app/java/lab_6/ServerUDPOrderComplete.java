@@ -1,5 +1,6 @@
 package ru.eltex.app.java.lab_6;
 
+import ru.eltex.app.java.GlobalConsts_for_lab6;
 import ru.eltex.app.java.lab_2.Order;
 
 import java.net.DatagramPacket;
@@ -18,13 +19,10 @@ public class ServerUDPOrderComplete implements IListenerComplete{
 
     @Override
     public void complete(Order order) {
-        byte[]message = "Your order complete".getBytes();
-        // TODO Магическое число
+        byte[]message = GlobalConsts_for_lab6.YOUR_ORDER_COMPLETE.getBytes();
         DatagramPacket packet = new DatagramPacket(message, message.length, order.getCredentials().getInetAddress(), client_port);
         try {
-            Thread.sleep(1000);
             socket.send(packet);
-            System.out.println("send");
         } catch (Exception e) {
             e.printStackTrace();
         }

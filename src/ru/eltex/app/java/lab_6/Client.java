@@ -1,8 +1,9 @@
 package ru.eltex.app.java.lab_6;
 
-import com.sun.source.tree.Scope;
+import ru.eltex.app.java.GlobalConsts_for_lab6;
 import ru.eltex.app.java.lab_2.Order;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
@@ -14,37 +15,29 @@ public class Client {
     private ObjectOutputStream objectOutputStream;
     private boolean fsend;
 
-    private int[] port_mas = {4446, 4447, 4448};
-
     public Client() throws Exception {
+        // test     ---
+        DatagramSocket socket1 = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[0]);
+        // test end ---
+
         fsend = false;
 
         boolean stop_flag = true;
         int i = 0;
         while (stop_flag) {
             try {
-                socket = new DatagramSocket(port_mas[i]);
+                socket = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[i]);
                 stop_flag = false;
             }
             catch (BindException e) {
                 i += 1;
-                if (i == port_mas.length)
+                if (i == GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION.length)
                     throw e;
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
         }
-//        try {
-//            socket = new DatagramSocket(4446);
-//        }
-//        // TODO Как разрулить такое?
-////        catch (BindException e) {
-////            socket = new DatagramSocket(4447);
-////        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public boolean listen() {
@@ -67,6 +60,25 @@ public class Client {
             return false;
         }
         //return false;
+    }
+
+    public boolean udp_response() {
+        try {
+            byte[] buf = new byte[256];
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
+
+            String response;
+            do {
+                socket.receive(packet);
+                response = new String(packet.getData(), 0, packet.getLength());
+            } while ( response.equals(GlobalConsts_for_lab6.UDP_PORT_FOR_INVITATION) );
+
+            //return response.equals(GlobalConsts_for_lab6.YOUR_ORDER_COMPLETE);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void TCPConnect() {
@@ -96,7 +108,7 @@ public class Client {
     public void TCPBreak() {
         try {
             objectOutputStream.close();
-            socket.close();
+            tcpSocket.close();
             fsend = false;
         }
         catch (Exception e) {
