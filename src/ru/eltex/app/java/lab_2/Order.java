@@ -57,6 +57,14 @@ public class Order implements Comparable<Order>, Serializable {
     public int getId() {
         return id;
     }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
 }
 
 enum StateOrder {

@@ -1,7 +1,5 @@
 package ru.eltex.app.java.lab_2;
 
-import ru.eltex.app.java.lab_5.ManagerOrderFile;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Orders<T extends Order> {
 
     private PriorityQueue<T> orders;
-    Map<Long, Order> warehouse_orders;
+    private Map<Long, Order> warehouse_orders;
 
     // Блокировка для параллельной работы коллекции
     // Блокировка заменила synchronized, т.к. нужно было передать
@@ -78,18 +76,18 @@ public class Orders<T extends Order> {
         ordersLock.unlock();
     }
 
-    public boolean changeOrderStatus() {
+    public Order changeOrderStatus() {
         ordersLock.lock();
 
-        for (Order value : warehouse_orders.values()) {
+        for (Order value : orders) {
             if ( !value.isCompleted() ) {
                 value.executeOrder();
                 ordersLock.unlock();
-                return true;
+                return value;
             }
         }
         ordersLock.unlock();
-        return false;
+        return null;
     }
 
     public boolean removeOneCompletedOrder() {
@@ -105,5 +103,12 @@ public class Orders<T extends Order> {
         }
         ordersLock.unlock();
         return false;
+    }
+
+    public boolean removeCompletedOrder(Order order) {
+        ordersLock.lock();
+        boolean flag_remove = orders.remove(order);
+        ordersLock.unlock();
+        return flag_remove;
     }
 }
