@@ -1,6 +1,7 @@
 package ru.eltex.app.java.lab_2;
 
 import java.io.Serializable;
+import java.net.InetAddress;
 
 public class Credentials implements Serializable {
     private int id;
@@ -8,6 +9,7 @@ public class Credentials implements Serializable {
     private String name;
     private String patronymic;
     private String email;
+    private transient InetAddress inetAddress;
 
     public Credentials(int id, String surname, String name,
                        String patronymic, String email) {
@@ -16,6 +18,7 @@ public class Credentials implements Serializable {
         this.name = name;
         this.patronymic = patronymic;
         this.email = email;
+        this.inetAddress = null;
     }
 
     public int getId() {
@@ -56,5 +59,13 @@ public class Credentials implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public InetAddress getInetAddress() {
+        return inetAddress;
+    }
+
+    public void setInetAddress(InetAddress inetAddress) {
+        this.inetAddress = inetAddress;
     }
 }
