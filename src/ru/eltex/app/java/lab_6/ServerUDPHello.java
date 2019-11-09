@@ -14,17 +14,18 @@ import java.net.InetAddress;
 public class ServerUDPHello implements Runnable {
 
     private DatagramSocket socket;
+    private int base_port;
     private InetAddress address;
     private DatagramPacket packet;
     private boolean running = true;
 
-    public ServerUDPHello() {
+    public ServerUDPHello(int base_port, int client_port, DatagramSocket socket) {
         try {
-            socket = new DatagramSocket(4445);
-            address = InetAddress.getByName("255.255.255.255"); //255.255.255.255
-
+            this.base_port = base_port;
+            this.socket = socket;
+            address = InetAddress.getByName("127.0.0.1");
             byte[]message = "4444".getBytes();
-            packet = new DatagramPacket(message, message.length, address, 4446);
+            packet = new DatagramPacket(message, message.length, address, client_port);
         } catch (Exception e) {
             e.printStackTrace();
         }

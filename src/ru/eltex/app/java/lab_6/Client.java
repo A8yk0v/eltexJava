@@ -4,10 +4,7 @@ import com.sun.source.tree.Scope;
 import ru.eltex.app.java.lab_2.Order;
 
 import java.io.ObjectOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.Socket;
+import java.net.*;
 
 public class Client {
     private DatagramSocket socket;
@@ -17,14 +14,37 @@ public class Client {
     private ObjectOutputStream objectOutputStream;
     private boolean fsend;
 
-    public Client() {
-        try {
-            socket = new DatagramSocket(4446);
-            fsend = false;
+    private int[] port_mas = {4446, 4447, 4448};
+
+    public Client() throws Exception {
+        fsend = false;
+
+        boolean stop_flag = true;
+        int i = 0;
+        while (stop_flag) {
+            try {
+                socket = new DatagramSocket(port_mas[i]);
+                stop_flag = false;
+            }
+            catch (BindException e) {
+                i += 1;
+                if (i == port_mas.length)
+                    throw e;
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            socket = new DatagramSocket(4446);
+//        }
+//        // TODO Как разрулить такое?
+////        catch (BindException e) {
+////            socket = new DatagramSocket(4447);
+////        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public boolean listen() {

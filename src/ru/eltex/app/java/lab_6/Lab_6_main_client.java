@@ -5,17 +5,23 @@ import ru.eltex.app.java.lab_4.AutomaticOrderGeneration;
 
 public class Lab_6_main_client {
 
-    static Client client = new Client();
+    static Client client;
 
     public static void main(String[] args) {
-        while ( !client.listen() );
+        try {
+            client = new Client();
+            while (!client.listen()) ;
 
-        client.TCPConnect();
+            client.TCPConnect();
 
-        Order myOrder = new AutomaticOrderGeneration().getOrder();
-        client.orderSend(myOrder);
-        client.TCPBreak();
+            Order myOrder = new AutomaticOrderGeneration().getOrder();
+            client.orderSend(myOrder);
+            client.TCPBreak();
 
-        System.out.println("Client end)");
+            System.out.println("Client end)");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
