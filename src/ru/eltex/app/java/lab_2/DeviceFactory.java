@@ -11,9 +11,8 @@ import java.util.Random;
  * Фабричный класс синглтон, возвращающий случайным образом
  * наследника класса товаров Device.
  *
- * Паттерн реализован ввиде Double Checked Locking & volatile Singleton.
+ * Паттерн реализован ввиде Double Checked Locking and volatile Singleton.
  */
-
 public class DeviceFactory {
 
     private static volatile DeviceFactory instance;

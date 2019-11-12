@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 
+/**
+ * Класс принимает по сокету заказа от клиента
+ * и добавляет его в коллекцию заказов
+ */
 public class TCPWorker implements Runnable {
     private Socket client;
     private Orders<Order> orders;

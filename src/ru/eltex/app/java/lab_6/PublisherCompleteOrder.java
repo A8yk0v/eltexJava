@@ -4,6 +4,12 @@ import ru.eltex.app.java.lab_2.Order;
 
 import java.util.ArrayList;
 
+/**
+ * Класс реализующи паттерн "Наблюдатель"
+ * Оповещающий подписчиков о наступлении события
+ * завершение заказа.
+ * Событие завешения заказа генерируется в классе InWaitingCheck
+ */
 public class PublisherCompleteOrder {
     private ArrayList<IListenerComplete> listeners;
 

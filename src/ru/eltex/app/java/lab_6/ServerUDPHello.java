@@ -12,7 +12,6 @@ import java.net.InetAddress;
  * отправляет широковещательный UPD пакет
  * с "приглашение" к подключению
  */
-
 public class ServerUDPHello implements Runnable {
 
     private DatagramSocket socket;

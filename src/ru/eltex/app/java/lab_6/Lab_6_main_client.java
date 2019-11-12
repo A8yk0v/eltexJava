@@ -1,10 +1,15 @@
 package ru.eltex.app.java.lab_6;
 
+import ru.eltex.app.java.GlobalConsts_for_lab6;
 import ru.eltex.app.java.lab_2.Order;
 import ru.eltex.app.java.lab_4.AutomaticOrderGeneration;
 
 import java.net.BindException;
 
+/**
+ * Класс с main методом для запуска клиента
+ * В цикле происходит оправка заказов на сервер
+ */
 public class Lab_6_main_client {
 
     static Client client;
@@ -22,7 +27,7 @@ public class Lab_6_main_client {
 
                 client.udp_response();
                 System.out.println("Client cycle end");
-                Thread.sleep(3000);
+                Thread.sleep(GlobalConsts_for_lab6.CLIENT_CYCLE_TIMEOUT);
             }
         }
         catch (BindException e) {

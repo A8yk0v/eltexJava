@@ -5,9 +5,8 @@ import java.util.Random;
 /**
  * Фабричный класс синглтон, возвращающий класса Credentials.
  *
- * Паттерн реализован ввиде Double Checked Locking & volatile Singleton.
+ * Паттерн реализован ввиде Double Checked Locking and volatile Singleton.
  */
-
 public class CredentialsFactory {
 
     private static volatile CredentialsFactory instance;

@@ -7,6 +7,14 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
+/**
+ * Класс инкапсулирет в себе весь функционал клиента:
+ * Это прослушивание UDP порта в ожидании приглашения от сервера;
+ * Установка TCP соединения с сервером;
+ * Отправка заказа на сервер;
+ * Разрыв TCP соединения;
+ * Ожидание подтверждения о выполнении заказа по UDP.
+ */
 public class Client {
     private DatagramSocket socket;
     private Socket tcpSocket;
@@ -16,10 +24,6 @@ public class Client {
     private boolean fsend;
 
     public Client() throws Exception {
-        // test     ---
-        //DatagramSocket socket1 = new DatagramSocket(GlobalConsts_for_lab6.UDP_PORTS_FOR_INVITATION[0]);
-        // test end ---
-
         fsend = false;
 
         boolean stop_flag = true;

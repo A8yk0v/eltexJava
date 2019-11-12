@@ -6,6 +6,10 @@ import ru.eltex.app.java.lab_2.Order;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+/**
+ * Класс отправляет на клиент информацию о завершении заказа
+ * Является подписчиком на событие завершения заказа
+ */
 public class ServerUDPOrderComplete implements IListenerComplete{
 
     private DatagramSocket socket;
